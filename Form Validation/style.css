@@ -1,0 +1,720 @@
+/* ==========================================================================
+   Obsidian Aurora Design System
+   Modern Glassmorphic Signup Form with Ambient Mesh & Micro-Pattern
+   ========================================================================== */
+
+:root {
+  /* Core Color Palette */
+  --bg-canvas: #090d16;
+  --bg-card: rgba(18, 24, 38, 0.72);
+  --bg-input: rgba(13, 18, 30, 0.7);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #6366f1;
+  --border-error: #f43f5e;
+  --border-success: #10b981;
+
+  /* Accent & Glow */
+  --primary-accent: #6366f1;
+  --primary-accent-hover: #4f46e5;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+
+  /* Text & Typography */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --text-error: #fb7185;
+  --text-success: #34d399;
+
+  /* Elevation & Shadows */
+  --shadow-card: 0 24px 48px -12px rgba(0, 0, 0, 0.7),
+                 0 0 50px -10px rgba(99, 102, 241, 0.15);
+  --shadow-input-focus: 0 0 0 3px rgba(99, 102, 241, 0.22);
+  --shadow-btn: 0 10px 25px -5px rgba(99, 102, 241, 0.45);
+
+  /* Radii & Transitions */
+  --radius-card: 22px;
+  --radius-input: 12px;
+  --radius-full: 9999px;
+  --transition-smooth: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset & Box Sizing */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 24px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Ambient Atmosphere & Modern Pattern Overlay
+   ========================================================================== */
+
+/* Glowing Gradient Orbs */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  animation: pulseFloat 14s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #6366f1 0%, rgba(99, 102, 241, 0) 70%);
+  top: -120px;
+  left: -80px;
+}
+
+.glow-2 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #06b6d4 0%, rgba(6, 182, 212, 0) 70%);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -7s;
+}
+
+@keyframes pulseFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate(-20px, 30px) scale(0.95);
+    opacity: 0.45;
+  }
+}
+
+/* Generative Micro-Dot Pattern Overlay */
+.grid-pattern-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0.2) 90%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0.2) 90%
+  );
+}
+
+/* ==========================================================================
+   Container & Glassmorphic Card
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-top-color: rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 36px 34px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Soft ambient highlight along card edge */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(99, 102, 241, 0.6),
+    rgba(6, 182, 212, 0.6),
+    transparent
+  );
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+
+.signup-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 14px;
+  color: #818cf8;
+  font-size: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+}
+
+.signup-header h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.signup-header .subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Form Groups & Input Layout
+   ========================================================================== */
+
+.form-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-input);
+  transition: var(--transition-smooth);
+}
+
+.input-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-input-focus);
+  background: rgba(13, 18, 30, 0.95);
+}
+
+/* Form Group focused label */
+.form-group:focus-within label {
+  color: #c7d2fe;
+}
+
+/* Leading Icon */
+.input-wrapper .leading-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-dim);
+  font-size: 15px;
+  transition: color 0.2s ease;
+  pointer-events: none;
+}
+
+.input-wrapper:focus-within .leading-icon {
+  color: #818cf8;
+}
+
+/* Input text field */
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 42px 12px 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.93rem;
+  font-weight: 500;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+/* Password Toggle Button */
+.toggle-password {
+  position: absolute;
+  right: 36px;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+  color: var(--text-main);
+}
+
+/* Status Icon (Check / X-mark) */
+.status-indicator {
+  position: absolute;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+/* Status icon adjustments when there is a toggle button */
+.input-wrapper.has-toggle input,
+.input-wrapper:has(.toggle-password) input {
+  padding-right: 70px;
+}
+
+/* Error message styling */
+.error-msg {
+  display: block;
+  font-size: 0.77rem;
+  font-weight: 500;
+  color: var(--text-error);
+  margin-top: 5px;
+  min-height: 18px;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s ease-out;
+}
+
+.form-group.has-error .error-msg {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Validation State Modifiers (Valid / Invalid)
+   ========================================================================== */
+
+/* Invalid State */
+.form-group.has-error .input-wrapper {
+  border-color: var(--border-error);
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.18);
+  animation: shakeX 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.form-group.has-error .status-icon.fa-xmark {
+  color: var(--border-error);
+}
+
+/* Valid State */
+.form-group.is-valid .input-wrapper {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.form-group.is-valid .status-icon.fa-check {
+  color: var(--border-success);
+}
+
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   Password Strength Meter
+   ========================================================================== */
+
+.strength-meter {
+  margin-top: 8px;
+  display: none; /* revealed when password input receives focus/input */
+}
+
+.strength-meter.active {
+  display: block;
+}
+
+.strength-bars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.strength-bars .bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.strength-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-align: right;
+  transition: color 0.25s ease;
+}
+
+/* Level styling for bars */
+.strength-meter[data-score="1"] .bar:nth-child(1) {
+  background: #f43f5e;
+}
+.strength-meter[data-score="1"] .strength-label {
+  color: #f43f5e;
+}
+
+.strength-meter[data-score="2"] .bar:nth-child(-n+2) {
+  background: #f59e0b;
+}
+.strength-meter[data-score="2"] .strength-label {
+  color: #f59e0b;
+}
+
+.strength-meter[data-score="3"] .bar:nth-child(-n+3) {
+  background: #3b82f6;
+}
+.strength-meter[data-score="3"] .strength-label {
+  color: #60a5fa;
+}
+
+.strength-meter[data-score="4"] .bar:nth-child(-n+4) {
+  background: #10b981;
+}
+.strength-meter[data-score="4"] .strength-label {
+  color: #34d399;
+}
+
+/* ==========================================================================
+   Custom Terms & Conditions Checkbox
+   ========================================================================== */
+
+.checkbox-group {
+  margin-top: 10px;
+  margin-bottom: 22px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkmark {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  margin-top: 1px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.checkbox-container:hover .custom-checkmark {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.checkbox-container input:checked ~ .custom-checkmark {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+.custom-checkmark::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .custom-checkmark::after {
+  display: block;
+}
+
+.terms-text a {
+  color: #818cf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.terms-text a:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Primary Action Button
+   ========================================================================== */
+
+.action-group {
+  margin-bottom: 12px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: var(--radius-input);
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-btn);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -4px rgba(99, 102, 241, 0.55);
+}
+
+.primary-btn:hover::after {
+  transform: translateX(100%);
+}
+
+.primary-btn:hover .btn-icon {
+  transform: translateX(3px);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.primary-btn.loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.btn-icon {
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+/* ==========================================================================
+   Footer Section
+   ========================================================================== */
+
+.signup-footer {
+  text-align: center;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.signup-footer p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.signup-footer .login-link {
+  color: #818cf8;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.signup-footer .login-link:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Modern Toast Notification
+   ========================================================================== */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  padding: 14px 18px;
+  border-radius: 14px;
+  z-index: 100;
+  max-width: 380px;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-icon {
+  font-size: 22px;
+  color: var(--text-success);
+  flex-shrink: 0;
+}
+
+.toast-content {
+  flex-grow: 1;
+}
+
+.toast-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.toast-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.toast-close:hover {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  .glass-card {
+    padding: 26px 20px;
+    border-radius: 18px;
+  }
+
+  .signup-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .input-wrapper input {
+    font-size: 0.9rem;
+    padding: 11px 40px 11px 36px;
+  }
+
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}

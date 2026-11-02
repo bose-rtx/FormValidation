@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Account • Sign Up</title>
+
+    <!-- Typography: Plus Jakarta Sans for clean modern aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for crisp iconography -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ambient background light effects & pattern grid -->
+    <div class="ambient-glow glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow glow-2" aria-hidden="true"></div>
+    <div class="grid-pattern-overlay" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="box glass-card">
+        <!-- Card Header -->
+        <header class="signup-header">
+          <div class="brand-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h1>Create an Account</h1>
+          <p class="subtitle">Join thousands of builders shaping the future</p>
+        </header>
+
+        <!-- Form Body -->
+        <main class="signup-body">
+          <form id="signupForm" novalidate>
+            <!-- Full Name Field -->
+            <div class="form-group" data-field="name">
+              <label for="name">Full Name</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user leading-icon" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="e.g. Alex Morgan"
+                  autocomplete="name"
+                  aria-describedby="nameError"
+                />
+                <span class="status-indicator" aria-hidden="true">
+                  <i class="fa-solid status-icon"></i>
+                </span>
+              </div>
+              <span class="error-msg" id="nameError" role="alert"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group" data-field="email">
+              <label for="email">Work Email</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-envelope leading-icon" aria-hidden="true"></i>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="alex.morgan@company.com"
+                  autocomplete="email"
+                  aria-describedby="emailError"
+                />
+                <span class="status-indicator" aria-hidden="true">
+                  <i class="fa-solid status-icon"></i>
+                </span>
+              </div>
+              <span class="error-msg" id="emailError" role="alert"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group" data-field="password">
+              <label for="password">Password</label>
+              <div class="input-wrapper has-toggle">
+                <i class="fa-solid fa-lock leading-icon" aria-hidden="true"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="At least 8 characters"
+                  autocomplete="new-password"
+                  aria-describedby="passError"
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  id="togglePassword"
+                  aria-label="Toggle password visibility"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <span class="status-indicator" aria-hidden="true">
+                  <i class="fa-solid status-icon"></i>
+                </span>
+              </div>
+
+              <!-- Password Strength Meter -->
+              <div class="strength-meter" id="strengthMeter" aria-hidden="true">
+                <div class="strength-bars">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </div>
+                <span class="strength-label" id="strengthLabel">Enter password</span>
+              </div>
+
+              <span class="error-msg" id="passError" role="alert"></span>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group" data-field="confirmPassword">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="input-wrapper has-toggle">
+                <i class="fa-solid fa-key leading-icon" aria-hidden="true"></i>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Re-enter your password"
+                  autocomplete="new-password"
+                  aria-describedby="confirmPassError"
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  id="toggleConfirmPassword"
+                  aria-label="Toggle confirm password visibility"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <span class="status-indicator" aria-hidden="true">
+                  <i class="fa-solid status-icon"></i>
+                </span>
+              </div>
+              <span class="error-msg" id="confirmPassError" role="alert"></span>
+            </div>
+
+            <!-- Terms & Conditions Checkbox -->
+            <div class="form-group checkbox-group" data-field="terms">
+              <label class="checkbox-container">
+                <input type="checkbox" id="termsCheck" />
+                <span class="custom-checkmark"></span>
+                <span class="terms-text">
+                  I agree to the <a href="#terms">Terms of Service</a> and
+                  <a href="#privacy">Privacy Policy</a>
+                </span>
+              </label>
+              <span class="error-msg" id="termsError" role="alert"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group action-group">
+              <button type="submit" id="submitBtn" class="primary-btn">
+                <span class="btn-text">Create Account</span>
+                <i class="fa-solid fa-arrow-right btn-icon"></i>
+              </button>
+            </div>
+          </form>
+        </main>
+
+        <!-- Card Footer -->
+        <footer class="signup-footer">
+          <p>Already have an account? <a href="#login" class="login-link">Log in</a></p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <aside class="toast" id="successToast" role="status" aria-live="polite">
+      <div class="toast-icon">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <div class="toast-content">
+        <p class="toast-title">Account Created!</p>
+        <p class="toast-desc">Welcome aboard. Check your inbox to verify your email.</p>
+      </div>
+      <button class="toast-close" id="toastClose" aria-label="Dismiss message">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </aside>
+
+    <script src="index.js"></script>
+  </body>
+</html>
